@@ -17,6 +17,13 @@ The following principles encourage RESTful applications to be simple, lightweigh
 
 ### How to Create Restfull Service in WCF?
 
+Few point are important which are given below:
+* Binding `(Web HTTP Binding)`
+* Help Url Active `(WCF Web HTTP Service Help Page)` [Click for Detail](https://msdn.microsoft.com/en-us/library/ee230442(v=vs.110).aspx)
+* Automatic Format Selection in WCF RESTful service[Click Here for More Detail](http://www.topwcftutorials.net/2014/02/automatic-format-selection-wcf-restful-service.html)
+* Activate Gzip Compression in IIS [For More](http://www.hanselman.com/blog/EnablingDynamicCompressionGzipDeflateForWCFDataFeedsODataAndOtherCustomServicesInIIS7.aspx) .
+*  Create Async Rest Full [Asynchronous Service Operation](https://msdn.microsoft.com/en-us/library/ms731177(v=vs.110).aspx)
+
     
 ##### *Ref MSDN url:*
 * **Create WCF REST**

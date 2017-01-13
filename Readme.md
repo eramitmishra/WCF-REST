@@ -13,7 +13,6 @@ The following principles encourage RESTful applications to be simple, lightweigh
 
 **Stateful interactions through hyperlinks:** Every interaction with a resource is stateless; that is, request messages are self-contained. Stateful interactions are based on the concept of explicit state transfer. Several techniques exist to exchange state, such as URI rewriting, cookies, and hidden form fields. State can be embedded in response messages to point to valid future states of the interaction. See Using Entity Providers to Map HTTP Response and Request Entity Bodies and Building URIs in the JAX-RS Overview document for more information.
 
-
 ---
 
 ### How to Create Restfull Service in WCF?

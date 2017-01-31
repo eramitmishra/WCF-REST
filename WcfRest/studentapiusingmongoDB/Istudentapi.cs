@@ -14,12 +14,13 @@ namespace studentapiusingmongoDB
     public interface Istudentapi
     {
         [OperationContract]
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped, 
-            Method = "GET",
-            RequestFormat = WebMessageFormat.Xml,
-            ResponseFormat = WebMessageFormat.Json,
-            UriTemplate ="getdata")]
-        string DoWork();
+        [XmlSerializerFormat]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.WrappedResponse, 
+            Method = "Post",
+            RequestFormat =WebMessageFormat.Xml,           
+           //ResponseFormat = WebMessageFormat.Json,
+            UriTemplate ="addstudent")]
+         Task<string> insertStudent(Student std);
 
         //http://localhost/studentapiusingmongoDB/studentapi.svc/getstudents
         [OperationContract]
@@ -30,6 +31,23 @@ namespace studentapiusingmongoDB
             UriTemplate = "getstudents")]
         Task<string> getstudents();
 
+
+
+
+
+    }
+
+    [DataContract]
+    public class Student
+    {
+        [DataMember]
+        public string Name { get; set; }
+        [DataMember]
+        public string RollNo { get; set; }
+        [DataMember]
+        public string Class { get; set; }
+        [DataMember]
+        public string Address { get; set; }
 
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfRest", "WcfRest\WcfRest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRestFullService", "StudentRestFullService\MovieRestFullService.csproj", "{88015E72-4AC5-443D-A4D8-F0FE5FF5FDAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "studentapiusingmongoDB", "studentapiusingmongoDB\studentapiusingmongoDB.csproj", "{7F194922-5428-41DD-9449-496D9EE930CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{88015E72-4AC5-443D-A4D8-F0FE5FF5FDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88015E72-4AC5-443D-A4D8-F0FE5FF5FDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88015E72-4AC5-443D-A4D8-F0FE5FF5FDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F194922-5428-41DD-9449-496D9EE930CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F194922-5428-41DD-9449-496D9EE930CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F194922-5428-41DD-9449-496D9EE930CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F194922-5428-41DD-9449-496D9EE930CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

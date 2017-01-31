@@ -20,14 +20,16 @@ namespace MovieRestFullService
         {
             try
             {
-                   string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\github\WCF-REST\WcfRest\StudentRestFullService\App_Data\moviedatabase.accdb";
+                   //string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\github\WCF-REST\WcfRest\StudentRestFullService\App_Data\moviedatabase.accdb";
 
 
-                //SqlConnection conn = new SqlConnection(connectionString);// SqlConnection(@"data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\dbStudent.mdf;User Instance=true");
-                OleDbConnection conn = new OleDbConnection(connectionString);
+                SqlConnection conn = new  SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\github\WCF-REST\WcfRest\StudentRestFullService\App_Data\dbStudent.mdf;Integrated Security=True");
+                //OleDbConnection conn = new OleDbConnection(connectionString);
                 conn.Open();
-                OleDbCommand com = new OleDbCommand("Select * from Movie", conn);
-                OleDbDataReader sdr = com.ExecuteReader();
+                //OleDbCommand com = new OleDbCommand("Select * from Movie", conn);
+                SqlCommand com = new SqlCommand("Select * from Movie", conn);
+                //OleDbDataReader sdr = com.ExecuteReader();
+                SqlDataReader sdr = com.ExecuteReader();
                 List<Movie> lsmovie = new List<Movie>();
                 while (sdr.HasRows)
                 {
@@ -67,9 +69,8 @@ namespace MovieRestFullService
             }
             catch (Exception ex)
             {
-
+                //return ex.ToString();
                 throw;
-
             }
 
         }

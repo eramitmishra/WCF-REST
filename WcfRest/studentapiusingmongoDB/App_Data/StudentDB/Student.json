@@ -1,0 +1,5 @@
+{ "_id" : { "$oid" : "589071c5b930262f00c84fe3" }, "Name" : "Amit", "Address" : "Delhi", "Class" : "10th", "RollNo" : 1 }
+{ "_id" : { "$oid" : "5890731fb930262f00c84fe4" }, "RollNo" : 2, "Name" : "Ravi", "Address" : "Delhi", "Class" : "12th" }
+{ "_id" : { "$oid" : "5890738db930262f00c84fe5" }, "RollNo" : 2, "Name" : "Ravi Kumar", "Address" : "Noida", "Class" : "12th" }
+{ "_id" : { "$oid" : "589073acb930262f00c84fe6" }, "RollNo" : 4, "Name" : "Mona", "Address" : "Delhi", "Class" : "12th" }
+{ "_id" : { "$oid" : "589073d3b930262f00c84fe7" }, "RollNo" : 5, "Name" : "Shayam", "Address" : "Delhi", "Class" : "12th" }

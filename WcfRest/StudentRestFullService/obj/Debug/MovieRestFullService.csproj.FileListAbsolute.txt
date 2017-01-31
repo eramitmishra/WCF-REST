@@ -21,3 +21,12 @@ D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\Microsoft.ApplicationInsig
 D:\github\WCF-REST\WcfRest\StudentRestFullService\obj\Debug\MovieRestFullService.csprojResolveAssemblyReference.cache
 D:\github\WCF-REST\WcfRest\StudentRestFullService\obj\Debug\MovieRestFullService.dll
 D:\github\WCF-REST\WcfRest\StudentRestFullService\obj\Debug\MovieRestFullService.pdb
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Bson.dll
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Driver.Core.dll
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Driver.dll
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Driver.Legacy.dll
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Bson.xml
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Driver.xml
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Driver.Core.xml
+D:\github\WCF-REST\WcfRest\StudentRestFullService\bin\MongoDB.Driver.Legacy.xml

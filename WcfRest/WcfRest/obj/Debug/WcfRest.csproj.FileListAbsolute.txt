@@ -16,3 +16,12 @@ D:\github\WCF-REST\WcfRest\WcfRest\bin\Microsoft.AI.WindowsServer.xml
 D:\github\WCF-REST\WcfRest\WcfRest\bin\Microsoft.ApplicationInsights.xml
 D:\github\WCF-REST\WcfRest\WcfRest\obj\Debug\WcfRest.dll
 D:\github\WCF-REST\WcfRest\WcfRest\obj\Debug\WcfRest.pdb
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Bson.dll
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Driver.Core.dll
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Driver.dll
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Driver.Legacy.dll
+D:\github\WCF-REST\WcfRest\WcfRest\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Bson.xml
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Driver.xml
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Driver.Core.xml
+D:\github\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Driver.Legacy.xml

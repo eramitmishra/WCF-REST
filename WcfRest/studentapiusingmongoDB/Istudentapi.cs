@@ -14,12 +14,13 @@ namespace studentapiusingmongoDB
     public interface Istudentapi
     {
         [OperationContract]
-        [XmlSerializerFormat]
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.WrappedResponse, 
-            Method = "Post",
+        //[XmlSerializerFormat]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, 
+            Method = "POST",
             RequestFormat =WebMessageFormat.Xml,           
-           //ResponseFormat = WebMessageFormat.Json,
-            UriTemplate ="addstudent")]
+            ResponseFormat = WebMessageFormat.Xml
+            //)]
+            ,UriTemplate ="/addstudent")]
          Task<string> insertStudent(Student std);
 
         //http://localhost/studentapiusingmongoDB/studentapi.svc/getstudents
@@ -28,11 +29,40 @@ namespace studentapiusingmongoDB
             Method = "GET",
             RequestFormat = WebMessageFormat.Xml,
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "getstudents")]
+            UriTemplate = "/getallstudents")]
         Task<string> getstudents();
 
+        [OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
+            Method = "GET",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/getstudentbyrollno/{rollno}")]
+        Task<string> getstudentbyrollnumber(string rollno);
 
+        [OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
+         Method = "GET",
+         RequestFormat = WebMessageFormat.Xml,
+         ResponseFormat = WebMessageFormat.Json,
+         UriTemplate = "/getstudentby/{propertyname}/{expression}")]
+        Task<string> getstudentbycategory(string propertyname, string expression);
 
+        [OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
+        Method = "PUT",
+        RequestFormat = WebMessageFormat.Xml,
+        ResponseFormat = WebMessageFormat.Xml,
+        UriTemplate = "/updatestudentbyrollno")]
+        Task<string> updatestudentbyrollnumber(Student std);
+
+        [OperationContract]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
+      Method = "DELETE",
+      RequestFormat = WebMessageFormat.Xml,
+      ResponseFormat = WebMessageFormat.Xml,
+      UriTemplate = "/deletestudentbyrollno/{rollno}")]
+        Task<string> deletestudentbyrollnumber(string rollno);
 
 
     }

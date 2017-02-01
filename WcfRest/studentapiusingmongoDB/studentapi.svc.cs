@@ -6,20 +6,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using System.Reflection;
+using MongoDB.Driver.Builders;
 
 namespace studentapiusingmongoDB
 {
-   
+
     /// <summary>
     /// www.codeproject.com/Articles/254714/Implement-CRUD-operations-using-RESTful-WCF-Service
-    //www.abhisheksur.com/2010/10/building-crud-in-restful-services-of.html
-    //www.codeproject.com/Articles/115054/Restful-Crud-Operation-on-a-WCF-Service
+    //https://docs.mongodb.com/getting-started/csharp/query/
+    //https://www.google.co.in/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=mongodb+query
     /// </summary>
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "studentapi" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select studentapi.svc or studentapi.svc.cs at the Solution Explorer and start debugging.
+    [ServiceBehavior]
     public class studentapi : Istudentapi
-    {
-       
+    {       
+
         public async Task<string> getstudents()
         {
             //throw new NotImplementedException();
@@ -39,7 +42,6 @@ namespace studentapiusingmongoDB
                 throw new FaultException("sorry cannot connected");                
             }
         }
-
         public async Task<string> insertStudent(Student std)
         {
             //throw new NotImplementedException();
@@ -56,23 +58,105 @@ namespace studentapiusingmongoDB
                                 { "Class" , std.Class}
                             };
 
-                await collection.InsertOneAsync(bsonStudent);
+               await collection.InsertOneAsync(bsonStudent);
                 /*find*/
                 var filter = Builders<BsonDocument>.Filter.Eq("RollNo", new BsonInt32(Convert.ToInt32(std.RollNo)));
                 var document = collection.Find(filter).First();
-                return document.ToJson();
+                return document.ToString();
             }
             catch (Exception ex)
             {
 
-                throw;
+                throw new FaultException("Not Inserted \n" + ex.ToString());
             }
         }
-        
 
+        public async Task<string> getstudentbycategory(string propertyname, string expression)
+        {
+            try
+            {
+                MongoClient client = new MongoClient("mongodb://localhost:27017");// connect to localhost
+                var database = client.GetDatabase("StudentDB");
+                var collection = database.GetCollection<BsonDocument>("Student");
 
+                FilterDefinition<BsonDocument> filter = null;
+                if (string.Equals(propertyname,"rollno",StringComparison.OrdinalIgnoreCase))
+                {
+                    filter = Builders<BsonDocument>.Filter.Eq("RollNo", new BsonInt32(Convert.ToInt32(expression)));
+                }
+                else
+                {
+                    //filter = Builders<BsonDocument>.Filter.AnyEq(propertyname, expression);
+                    filter = Builders<BsonDocument>.Filter.Eq(propertyname, expression);
 
+                }
 
+                //PropertyInfo propInfo = typeof(Student).GetProperty(propertyname);
+                //object bsonValue = Convert.ChangeType(expression, Nullable.GetUnderlyingType(propInfo.PropertyType) ?? propInfo.PropertyType);
+                //FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq(propInfo.Name, bsonValue);
 
+                //var query = Query.Matches("FirstName", ".*as.*");
+
+                var document = await collection.FindAsync(filter);
+                if (document.ToList().Count == 1) {
+                 return document.FirstOrDefault().ToString();
+                }
+                else if (document.ToList().Count > 1)
+                {
+                            List<BsonDocument> ls = new List<BsonDocument>();
+                    using (var cursor = await collection.FindAsync(filter))
+                    {
+                        while (await cursor.MoveNextAsync())
+                        {
+                            var batch = cursor.Current;
+                            foreach (var documents in batch)
+                            {
+                                // process document
+                                //count++;
+                                ls.Add(documents);
+                            }
+                        }
+                    }
+
+                    return ls.ToJson();
+                }
+                else
+                {
+                    return "not record Found";
+                }
+                //return document.ToListAsync().ToJson();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("sorry cannot connected");
+            }
+        }
+
+        public async Task<string> getstudentbyrollnumber(string rollno)
+        {
+            try
+            {
+                MongoClient client = new MongoClient("mongodb://localhost:27017");// connect to localhost
+                var database = client.GetDatabase("StudentDB");
+                var collection = database.GetCollection<BsonDocument>("Student");
+                var filter = Builders<BsonDocument>.Filter.Eq("RollNo", new BsonInt32(Convert.ToInt32(rollno)));
+                var document = await collection.FindAsync(filter);
+                return document.FirstOrDefault().ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("sorry cannot connected");
+            }
+        }
+
+        public Task<string> updatestudentbyrollnumber(Student std)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> deletestudentbyrollnumber(string rollno)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

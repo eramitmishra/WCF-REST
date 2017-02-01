@@ -53,3 +53,4 @@ D:\GitHubProject\WCF-REST\WcfRest\WcfRest\bin\MongoDB.Driver.Legacy.xml
 D:\GitHubProject\WCF-REST\WcfRest\WcfRest\obj\Debug\WcfRest.csprojResolveAssemblyReference.cache
 D:\GitHubProject\WCF-REST\WcfRest\WcfRest\obj\Debug\WcfRest.dll
 D:\GitHubProject\WCF-REST\WcfRest\WcfRest\obj\Debug\WcfRest.pdb
+D:\github\WCF-REST\WcfRest\WcfRest\obj\Debug\WcfRest.csprojResolveAssemblyReference.cache

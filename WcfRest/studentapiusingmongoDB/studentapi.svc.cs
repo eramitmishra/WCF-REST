@@ -1,9 +1,10 @@
 ﻿using System;
 using MongoDB.Bson;
 using MongoDB.Driver;
-
+using MongoDB.Driver.Linq;
 using System.Collections.Generic;
 using System.Linq;
+
 using System.Threading.Tasks;
 using System.ServiceModel;
 using System.Reflection;
@@ -97,34 +98,60 @@ namespace studentapiusingmongoDB
 
                 //var query = Query.Matches("FirstName", ".*as.*");
 
-                var document = await collection.FindAsync(filter);
-                if (document.ToList().Count == 1) {
-                 return document.FirstOrDefault().ToString();
-                }
-                else if (document.ToList().Count > 1)
+                
+
+       
+                //collection.FindAsync
+
+                List<BsonDocument> ls = new List<BsonDocument>();
+                using (var cursor = await collection.FindAsync(filter))
                 {
-                            List<BsonDocument> ls = new List<BsonDocument>();
-                    using (var cursor = await collection.FindAsync(filter))
+                    while (await cursor.MoveNextAsync())
                     {
-                        while (await cursor.MoveNextAsync())
+                        var batch = cursor.Current;
+                        foreach (var documents in batch)
                         {
-                            var batch = cursor.Current;
-                            foreach (var documents in batch)
-                            {
-                                // process document
-                                //count++;
-                                ls.Add(documents);
-                            }
+                            ls.Add(documents);
                         }
                     }
+                }
 
-                    return ls.ToJson();
-                }
-                else
+                if (ls.Count == 0)
                 {
-                    return "not record Found";
+                    ls.Add(new BsonDocument { { "Message" , "Record Not Found." } });
                 }
-                //return document.ToListAsync().ToJson();
+
+                 //return   (ls.Count > 0) ? ls.ToJson() : } ;
+               return ls.ToJson();
+
+                //var document = await collection.FindAsync(filter);
+                //if (document.ToList().Count == 1) {
+                // return document.FirstOrDefault().ToString();
+                //}
+                //else if (document.ToList().Count > 1)
+                //{
+                //            List<BsonDocument> ls = new List<BsonDocument>();
+                //    using (var cursor = await collection.FindAsync(filter))
+                //    {
+                //        while (await cursor.MoveNextAsync())
+                //        {
+                //            var batch = cursor.Current;
+                //            foreach (var documents in batch)
+                //            {
+                //                // process document
+                //                //count++;
+                //                ls.Add(documents);
+                //            }
+                //        }
+                //    }
+
+                //    return ls.ToJson();
+                //}
+                //else
+                //{
+                //    return "not record Found";
+                //}
+                ////return document.ToListAsync().ToJson();
             }
             catch (Exception ex)
             {
@@ -149,14 +176,48 @@ namespace studentapiusingmongoDB
             }
         }
 
-        public Task<string> updatestudentbyrollnumber(Student std)
+        public async Task<string> updatestudentbyrollnumber(Student std)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MongoClient client = new MongoClient("mongodb://localhost:27017");// connect to localhost
+                var database = client.GetDatabase("StudentDB");
+                var collection = database.GetCollection<BsonDocument>("Student");
+                var filter = Builders<BsonDocument>.Filter.Eq("RollNo", new BsonInt32(Convert.ToInt32(std.RollNo)));
+
+                var update = Builders<BsonDocument>.Update.Set("Name", std.Name)
+                    .Set("RollNo", new BsonInt32(Convert.ToInt32(std.RollNo)))
+                    .Set("Address", std.Address)
+                    .Set("Class", std.Class);
+
+                var document = await collection.UpdateOneAsync(filter, update);
+
+                return string.Format("Number of Update: {1} and Number of Matching Record: {0}.", document.MatchedCount, document.ModifiedCount);
+
+
+                //return document.ToJson();
+            }
+            catch (Exception ex)
+            {                
+                throw new FaultException("Not Update \n" + ex.ToString());
+            }
         }
 
-        public Task<string> deletestudentbyrollnumber(string rollno)
+        public async Task<string> deletestudentbyrollnumber(string rollno)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MongoClient client = new MongoClient("mongodb://localhost:27017");// connect to localhost
+                var database = client.GetDatabase("StudentDB");
+                var collection = database.GetCollection<BsonDocument>("Student");
+                var filter = Builders<BsonDocument>.Filter.Eq("RollNo", new BsonInt32(Convert.ToInt32(rollno)));          
+                var document = await collection.DeleteOneAsync(filter);
+                return (document.DeletedCount > 0) ? "Record Deleted Successfully" : "Record Not Deleted or It may not be in DataBase";                
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Not Deleted \n" + ex.ToString());
+            }
         }
     }
 }

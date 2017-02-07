@@ -49,7 +49,7 @@ namespace studentapiusingmongoDB
         Task<string> getstudentbycategory(string propertyname, string expression);
 
         [OperationContract]
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare,
         Method = "PUT",
         RequestFormat = WebMessageFormat.Xml,
         ResponseFormat = WebMessageFormat.Xml,

@@ -57,9 +57,9 @@ namespace studentapiusingmongoDB
                                 { "Address", std.Address},
                                 { "Class" , std.Class}
                             };
-
-               await collection.InsertOneAsync(bsonStudent);
-                /*find*/
+              
+            await collection.InsertOneAsync(bsonStudent);
+               // /*find*/
                 var filter = Builders<BsonDocument>.Filter.Eq("RollNo", new BsonInt32(Convert.ToInt32(std.RollNo)));
                 var document = collection.Find(filter).First();
                 return document.ToString();
@@ -86,8 +86,8 @@ namespace studentapiusingmongoDB
                 }
                 else
                 {
-                    //filter = Builders<BsonDocument>.Filter.AnyEq(propertyname, expression);
-                    filter = Builders<BsonDocument>.Filter.Eq(propertyname, expression);
+                    filter = Builders<BsonDocument>.Filter.AnyEq(propertyname, expression);
+                   // filter = Builders<BsonDocument>.Filter.AnyIn(propertyname, expression);
 
                 }
 
@@ -95,35 +95,59 @@ namespace studentapiusingmongoDB
                 //object bsonValue = Convert.ChangeType(expression, Nullable.GetUnderlyingType(propInfo.PropertyType) ?? propInfo.PropertyType);
                 //FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq(propInfo.Name, bsonValue);
 
-                //var query = Query.Matches("FirstName", ".*as.*");
 
-                var document = await collection.FindAsync(filter);
-                if (document.ToList().Count == 1) {
-                 return document.FirstOrDefault().ToString();
-                }
-                else if (document.ToList().Count > 1)
+
+
+                List<BsonDocument> ls = new List<BsonDocument>();
+                using (var cursor = await collection.FindAsync(filter))
                 {
-                            List<BsonDocument> ls = new List<BsonDocument>();
-                    using (var cursor = await collection.FindAsync(filter))
+                    while (await cursor.MoveNextAsync())
                     {
-                        while (await cursor.MoveNextAsync())
+                        var batch = cursor.Current;
+                        foreach (var documents in batch)
                         {
-                            var batch = cursor.Current;
-                            foreach (var documents in batch)
-                            {
-                                // process document
-                                //count++;
-                                ls.Add(documents);
-                            }
+                            ls.Add(documents);
                         }
                     }
+                }
 
-                    return ls.ToJson();
-                }
-                else
-                {
-                    return "not record Found";
-                }
+                ls = (ls.Count > 0) ? ls : new List<BsonDocument> { new BsonDocument { { "Message", "No Record Found!"} } };
+
+
+                return ls.ToJson();
+
+
+
+
+                //var query = Query.Matches("FirstName", ".*as.*");
+
+                //var document = await collection.FindAsync(filter);
+                //if (document.ToList().Count == 1) {
+                // return document.FirstOrDefault().ToString();
+                //}
+                //else if (document.ToList().Count > 1)
+                //{
+                //            List<BsonDocument> ls = new List<BsonDocument>();
+                //    using (var cursor = await collection.FindAsync(filter))
+                //    {
+                //        while (await cursor.MoveNextAsync())
+                //        {
+                //            var batch = cursor.Current;
+                //            foreach (var documents in batch)
+                //            {
+                //                // process document
+                //                //count++;
+                //                ls.Add(documents);
+                //            }
+                //        }
+                //    }
+
+                //    return ls.ToJson();
+                //}
+                //else
+                //{
+                //    return "not record Found";
+                //}
                 //return document.ToListAsync().ToJson();
             }
             catch (Exception ex)

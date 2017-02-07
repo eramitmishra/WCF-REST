@@ -1,5 +1,15 @@
-{ 
-    "_id" : "58983078e76d311554a24a1d", 
-    "UserId" : "Admin", 
-    "Password" : "Admin"
-}
+{
+  "_id": "58983078e76d311554a24a1d",
+  "UserId": "Admin",
+  "Password": "Admin"
+} http: //www.amazon.in/SAMSUNG-M471B5173QH0-YK0-PC3-12800-512MBX64-512MX8/dp/B00T592DGG
+
+
+
+
+
+
+
+
+Attributes  BankLabel  Capacity    Caption          ConfiguredClockSpeed  ConfiguredVoltage  CreationClassName     DataWidth  Description      DeviceLocator         FormFactor  HotSwappable  InstallDate  InterleaveDataDepth  InterleavePosition  Manufacturer  MaxVoltage  MemoryType  MinVoltage  Model  Name             OtherIdentifyingInfo  PartNumber        PositionInRow  PoweredOn  Removable  Replaceable  SerialNumber  SKU  SMBIOSMemoryType  Speed  Status  Tag                TotalWidth  TypeDetail  Version  
+1           BANK 2     4294967296  Physical Memory  1600                                     Win32_PhysicalMemory  64         Physical Memory  Bottom-Slot 2(right)  12                                     1                    2                   Samsung                   24                             Physical Memory                        M471B5173QH0-YK0  1                                                 1826E962           24                1600           Physical Memory 1  64          128                  
